@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0b6b66">
+  <meta name="description" content="PanelHAD — prototipo de apoyo operativo para Hospitalización a Domicilio">
+  <title>PanelHAD · Hospitalización a Domicilio</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">H</span><div><strong>PanelHAD</strong><small>Hospitalización a domicilio</small></div></div>
+    <nav id="nav">
+      <button class="nav-item active" data-view="turno"><span>⌂</span> Turno</button>
+      <button class="nav-item" data-view="pacientes"><span>♙</span> Pacientes</button>
+      <button class="nav-item" data-view="ruta"><span>⌖</span> Ruta</button>
+      <button class="nav-item" data-view="material"><span>▣</span> Material</button>
+      <button class="nav-item" data-view="protocolos"><span>☷</span> Protocolos</button>
+    </nav>
+    <div class="sidebar-note"><b>PROTOTIPO</b><p>Datos ficticios. No introducir datos reales de pacientes.</p></div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar"><div><p class="eyebrow">HOSPITALIZACIÓN A DOMICILIO</p><h1 id="page-title">Mi turno</h1></div><div class="top-actions"><span id="clock"></span><button class="icon-btn" id="themeBtn" title="Cambiar tema">◐</button><div class="avatar">EN</div></div></header>
+
+    <section id="view-turno" class="view active">
+      <div class="welcome"><div><span class="pill green">● TURNO EN CURSO</span><h2>Buenas tardes</h2><p id="todayText">Resumen operativo de la jornada.</p></div><button class="primary" data-go="ruta">Ver ruta del turno →</button></div>
+      <div class="stats" id="stats"></div>
+      <div class="dashboard-grid">
+        <div class="card radar-card"><div class="card-head"><div><p class="eyebrow">RADAR HAD</p><h3>Qué requiere atención</h3></div><span class="live">● EN DIRECTO</span></div><div id="radar"></div></div>
+        <div class="card progress-card"><div class="card-head"><div><p class="eyebrow">PROGRESO</p><h3>Turno de hoy</h3></div></div><div class="progress-ring" id="progressRing"><div><strong id="progressPct">0%</strong><span>completado</span></div></div><div id="progressInfo"></div></div>
+      </div>
+      <div class="card"><div class="card-head"><div><p class="eyebrow">AGENDA</p><h3>Próximas visitas</h3></div><button class="text-btn" data-go="pacientes">Ver pacientes →</button></div><div id="agenda" class="agenda"></div></div>
+      <div class="card pending"><div class="card-head"><div><p class="eyebrow">COMPROBACIÓN</p><h3>¿Qué me falta?</h3></div></div><div id="pendingList"></div></div>
+    </section>
+
+    <section id="view-pacientes" class="view">
+      <div class="section-intro"><div><p>Pacientes asignados al turno y estado de sus visitas.</p></div><div class="search"><span>⌕</span><input id="patientSearch" placeholder="Buscar paciente, zona o procedimiento…"></div></div>
+      <div class="filter-row" id="patientFilters"><button class="chip active" data-filter="all">Todos</button><button class="chip" data-filter="pending">Pendientes</button><button class="chip" data-filter="priority">Prioritarios</button><button class="chip" data-filter="done">Completados</button></div>
+      <div id="patientGrid" class="patient-grid"></div>
+    </section>
+
+    <section id="view-ruta" class="view">
+      <div class="route-layout"><div class="card route-list-card"><div class="card-head"><div><p class="eyebrow">PLAN DEL TURNO</p><h3>Secuencia sugerida</h3></div><button class="secondary" id="optimizeBtn">↻ Reordenar</button></div><div class="route-summary"><b id="routeVisits"></b><span id="routeKm"></span><span id="routeTime"></span></div><div id="routeList"></div></div><div class="map-placeholder"><div class="map-grid"></div><div class="map-label"><span>⌖</span><strong>Vista de ruta</strong><small>Prototipo sin geolocalización real</small></div><div id="mapPins"></div></div></div>
+    </section>
+
+    <section id="view-material" class="view">
+      <div class="section-intro"><p>Lista logística generada a partir de las visitas del turno.</p><button class="secondary" id="resetMaterial">Restablecer</button></div>
+      <div class="material-layout"><div class="card"><div class="card-head"><div><p class="eyebrow">PREPARACIÓN</p><h3>Bolsa / vehículo</h3></div><span id="materialCount" class="count-badge"></span></div><div class="material-progress"><div id="materialBar"></div></div><div id="materialList"></div></div><div class="card"><p class="eyebrow">RESUMEN</p><h3>Por tipo</h3><div id="materialCategories"></div><div class="info-box">ℹ️ <span>Este inventario es demostrativo. Debe adaptarse a los protocolos, stock y procedimientos reales de cada unidad.</span></div></div></div>
+    </section>
+
+    <section id="view-protocolos" class="view">
+      <div class="section-intro"><div><p>Acceso rápido a procedimientos. Contenido demostrativo, pendiente de validación clínica.</p></div><div class="search"><span>⌕</span><input id="protocolSearch" placeholder="Buscar protocolo…"></div></div>
+      <div class="warning-banner"><b>⚠ Biblioteca en modo prototipo</b><span>Los contenidos clínicos deberán proceder exclusivamente de documentación validada por la organización sanitaria.</span></div>
+      <div id="protocolGrid" class="protocol-grid"></div>
+    </section>
+  </main>
+</div>
+
+<div class="bottom-nav" id="bottomNav"><button class="active" data-view="turno">⌂<small>Turno</small></button><button data-view="pacientes">♙<small>Pacientes</small></button><button data-view="ruta">⌖<small>Ruta</small></button><button data-view="material">▣<small>Material</small></button><button data-view="protocolos">☷<small>Protocolos</small></button></div>
+
+<div class="modal-backdrop" id="modal"><div class="modal"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
